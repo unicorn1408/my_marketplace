@@ -2,6 +2,11 @@ version: '3.1'
 
 services:
 
+  build:
+    dockerfile: Dockerfile
+    context: .
+    restart: always
+
   db:
     image: postgres
     restart: always
@@ -13,3 +18,4 @@ services:
     restart: always
     ports:
       - 8080:8080
+
