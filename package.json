@@ -8,11 +8,12 @@
     "migrate-down": "npx knex migrate:down --knexfile ./db/knexfile.js",
     "dev": "nodemon src/app.js",
     "lint": "./node_modules/.bin/eslint",
-    "lint-fix": "npx eslint --fix ."
+    "lint-fix": "npx eslint --fix"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "boom": "^7.3.0",
     "knex": "^2.3.0",
     "koa": "^2.13.4",
     "koa-body": "^5.0.0",

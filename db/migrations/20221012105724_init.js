@@ -9,7 +9,6 @@ exports.up = async function (knex) {
       table.string('first_name', 20).notNullable();
       table.string('last_name', 20).notNullable();
       table.string('email', 30).notNullable();
-      table.integer('phone_num_id', 3).notNullable();
       table.string('password').notNullable();
     });
 };
