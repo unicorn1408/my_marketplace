@@ -1,8 +1,15 @@
 const { Model } = require('objection');
+const {hashPassword} = require('../../libs/hashPassword')
 
 class User extends Model {
   static get tableName() {
     return 'users';
+  }
+
+  static async beforeInsert({ inputItems }) {
+    const userPassword = inputItems[0].password;
+    const hashedPassword = await hashPassword(userPassword);    
+    inputItems[0].password = hashedPassword;
   }
 
   static get jsonSchema() {
@@ -18,20 +25,21 @@ class User extends Model {
       },
     };
   }
-  // just saved for later
-  // static relationMappings() {
-  //   const Example = require('./example')
-  //   return {
-  //    example: {
-  //      relation: Model.BelongsToOneRelation,
-  //      modelClass: Example,
-  //      join: {
-  //       from: 'examples.example_id',
-  //       to: 'user.id',
-  //      }
-  //    }
-  //   }
-  // }
+
+  static relationMappings() {
+    const { PhoneNumber } = require('../phone_numbers/phone_number.model');
+
+    return {
+      phone_number: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: PhoneNumber,
+        join: {
+          from: 'users.phone_number_id',
+          to: 'phone_numbers.id',
+        },
+      },
+    };
+  }
 }
 
 module.exports = { User };

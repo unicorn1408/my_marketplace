@@ -4,7 +4,7 @@ const heartbeatCheck = (db) => {
   })
     .catch((e) => {
       console.log('PostgreSQL not connected');
-      console.error(e);
+      console.log(e);
     });
 };
 
