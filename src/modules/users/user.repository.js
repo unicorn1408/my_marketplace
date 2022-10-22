@@ -13,9 +13,9 @@ const UserRepository = {
           number: userData.number,
         },
       ],
-    });
+    })
 
-    return newUser;
+    return newUser
   },
 };
 
