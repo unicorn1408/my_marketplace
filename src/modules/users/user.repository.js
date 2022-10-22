@@ -15,7 +15,7 @@ const UserRepository = {
       ],
     });
 
-    return newUser
+    return newUser;
   },
 };
 
