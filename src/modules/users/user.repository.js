@@ -13,7 +13,7 @@ const UserRepository = {
           number: userData.number,
         },
       ],
-    })
+    });
 
     return newUser
   },
