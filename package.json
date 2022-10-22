@@ -30,7 +30,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "console.log('test')"
+      "pre-commit": "npx eslint --fix ."
   }
   }
 }
