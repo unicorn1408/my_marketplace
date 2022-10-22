@@ -1,16 +1,11 @@
-const {User} = require('../user.model');
+const { UserRepository } = require('../user.repository');
 
 const createUser = async (ctx) => {
-  const newUserData = ctx.request.body
+  const newUserData = ctx.request.body;
 
-  const newUser = await User.query().insert({
-    first_name : newUserData.first_name,
-    last_name : newUserData.last_name,
-    email : newUserData.email,
-    password : newUserData.password
-  });
-
-  return ctx.response.body = newUser
+  const newUser = UserRepository.create(newUserData);
+  
+  return newUser;
 };
 
 module.exports = { createUser };

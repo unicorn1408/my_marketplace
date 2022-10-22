@@ -2,15 +2,9 @@ const Router = require('koa-router');
 
 const router = new Router();
 
-const {userRouter} = require('./modules/users/routes')
+const { userRouter } = require('./modules/users/index');
 
-// const { makeContoller } = require('./libs/makeController');
-
-// const helloTest = async (ctx) => {
-//   return ctx.body = 'world!';
-// };
-// router.get('/hello', makeContoller(helloTest));
-router.use('/users', userRouter.routes())
+router.use('/users', userRouter.routes());
 
 router.get('/healthcheck', async (ctx) => {
   const healthcheck = {
@@ -21,4 +15,5 @@ router.get('/healthcheck', async (ctx) => {
   };
   ctx.body = healthcheck;
 });
-module.exports = {router};
+
+module.exports = { router };

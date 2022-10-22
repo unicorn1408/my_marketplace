@@ -1,4 +1,4 @@
-const { User } = require('./user_model');
-const {} = require('./user_controllers');
+const { User } = require('./user.model');
+const { userRouter } = require('./routes');
 
-module.exports = { User };
+module.exports = { User, userRouter };
