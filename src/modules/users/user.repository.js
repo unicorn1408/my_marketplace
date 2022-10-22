@@ -14,8 +14,8 @@ const UserRepository = {
         },
       ],
     });
-    newUser.password = userData.password
-    return newUser;
+
+    return newUser
   },
 };
 
