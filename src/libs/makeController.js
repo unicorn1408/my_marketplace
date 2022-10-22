@@ -1,3 +1,4 @@
+/* eslint-disable no-ex-assign */
 const Boom = require('boom');
 
 function makeContoller(controller) {

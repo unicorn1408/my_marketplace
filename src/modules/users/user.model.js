@@ -1,3 +1,4 @@
+/* eslint-disable global-require, no-param-reassign */
 const { Model } = require('objection');
 const { hashPassword } = require('../../libs/hashPassword');
 
