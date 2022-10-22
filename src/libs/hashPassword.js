@@ -6,6 +6,7 @@ const hashPassword = async (password) => {
     return hash;
   } catch (err) {
     console.log(err);
+    return null;
   }
 };
 

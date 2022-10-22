@@ -5,7 +5,7 @@
 exports.up = async function (knex) {
   await knex.schema
     .createTable('users', (table) => {
-      table.increments('id');
+      table.increments('id').primary();
       table.string('first_name', 20).notNullable();
       table.string('last_name', 20).notNullable();
       table.string('email', 30).notNullable();
@@ -15,8 +15,9 @@ exports.up = async function (knex) {
 
   await knex.schema
     .createTable('phone_numbers', (table) => {
-      table.increments('id');
+      table.increments('id').primary();
       table.string('number', 20).notNullable();
+      table.enu('type', ['shop', 'user']);
     });
 };
 

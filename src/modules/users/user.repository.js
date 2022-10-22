@@ -11,11 +11,19 @@ const UserRepository = {
       phone_number: [
         {
           number: userData.number,
+          type: 'user',
         },
       ],
     });
 
     return newUser;
+  },
+
+  async findByEmail(email) {
+    const result = await User.query()
+      .where('email', email);
+
+    return result;
   },
 };
 
