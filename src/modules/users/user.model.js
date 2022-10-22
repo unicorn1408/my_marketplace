@@ -1,5 +1,5 @@
 const { Model } = require('objection');
-const {hashPassword} = require('../../libs/hashPassword')
+const { hashPassword } = require('../../libs/hashPassword');
 
 class User extends Model {
   static get tableName() {
@@ -8,8 +8,12 @@ class User extends Model {
 
   static async beforeInsert({ inputItems }) {
     const userPassword = inputItems[0].password;
-    const hashedPassword = await hashPassword(userPassword);    
+    const hashedPassword = await hashPassword(userPassword);
     inputItems[0].password = hashedPassword;
+  }
+
+  static async afterInsert({ inputItems }) {
+    delete inputItems[0].password;
   }
 
   static get jsonSchema() {
