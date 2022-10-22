@@ -9,10 +9,12 @@ class User extends Model {
   static async beforeInsert({ inputItems }) {
     const userPassword = inputItems[0].password;
     const hashedPassword = await hashPassword(userPassword);
+    // eslint-disable-next-line no-param-reassign
     inputItems[0].password = hashedPassword;
   }
 
   static async afterInsert({ inputItems }) {
+    // eslint-disable-next-line no-param-reassign
     delete inputItems[0].password;
   }
 
@@ -22,16 +24,20 @@ class User extends Model {
       required: ['first_name', 'last_name', 'email', 'password'],
 
       properties: {
+        id: { type: 'integer' },
         first_name: { type: 'string', minLength: 1, maxLength: 20 },
         last_name: { type: 'string', minLength: 1, maxLength: 20 },
         email: { type: 'string', minLength: 5, maxLength: 30 },
-        password: { type: 'string', minLength: 1, maxLength: 20 },
+        password: { type: 'string', minLength: 1, maxLength: 100 },
       },
     };
   }
 
   static relationMappings() {
+    // eslint-disable-next-line global-require
     const { PhoneNumber } = require('../phone_numbers/phone_number.model');
+    // eslint-disable-next-line global-require
+    const { Shop } = require('../shops/index');
 
     return {
       phone_number: {
@@ -40,6 +46,18 @@ class User extends Model {
         join: {
           from: 'users.phone_number_id',
           to: 'phone_numbers.id',
+        },
+      },
+      shops: {
+        relation: Model.ManyToManyRelation,
+        modelClass: Shop,
+        join: {
+          from: 'users.id',
+          through: {
+            from: 'users_shops.user_id',
+            to: 'users_shops.shop_id',
+          },
+          to: 'shops.id',
         },
       },
     };
