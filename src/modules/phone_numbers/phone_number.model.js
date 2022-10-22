@@ -14,6 +14,6 @@ class PhoneNumber extends Model {
         number: { type: 'string', minLength: 1, maxLength: 20 },
       },
     };
-  };
+  }
 }
 module.exports = { PhoneNumber };
