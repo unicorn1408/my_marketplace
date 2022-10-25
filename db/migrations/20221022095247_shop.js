@@ -1,3 +1,4 @@
+/* eslint-disable semi */
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
@@ -5,26 +6,23 @@
 exports.up = async function (knex) {
   await knex.schema
     .createTable('shops', (table) => {
-      table.increments('id');
+      table.increments('id').primary();
       table.string('name', 20).notNullable();
-      table.string('expiratioDate', 20);
       table.integer('phone_number_id', 4).notNullable();
+      table.timestamp('expirationDate');
     });
   await knex.schema
-    .createTable('admins', (table) => {
-      table.increments('id');
-      table.string('email', 20).notNullable();
-      table.string('password', 100).notNullable();
-      table.integer('shop_id', 4);
+    .createTable('users_shops', (table) => {
+      table.integer('user_id', 4).notNullable();
+      table.integer('shop_id', 4).notNullable();
+      table.enu('user_role', ['admin', 'editor']);
     });
-};
-
+}
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
 exports.down = async function (knex) {
   await knex.schema
-    .dropTable('shops')
-    .dropTable('admins');
+    .dropTable('shops');
 };

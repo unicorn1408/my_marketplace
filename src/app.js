@@ -20,3 +20,8 @@ app.use(router.routes());
 app.listen(3001, () => {
   console.log('server started');
 });
+
+
+//user/me - info about user
+//login
+// eslint
