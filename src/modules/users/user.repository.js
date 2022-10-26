@@ -16,7 +16,7 @@ const UserRepository = {
       ],
     });
 
-    return newUser;
+    return newUser
   },
 
   async findByEmail(email) {
