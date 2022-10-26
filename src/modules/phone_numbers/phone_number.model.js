@@ -12,6 +12,7 @@ class PhoneNumber extends Model {
 
       properties: {
         number: { type: 'string', minLength: 1, maxLength: 20 },
+        type: { type: 'string', minLength: 1, maxLength: 20 },
       },
     };
   }
