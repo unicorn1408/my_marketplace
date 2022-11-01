@@ -1,6 +1,6 @@
 const { Model } = require('objection');
 
-class PhoneNumber extends Model {
+class PhoneNumberModel extends Model {
   static get tableName() {
     return 'phone_numbers';
   }
@@ -17,4 +17,4 @@ class PhoneNumber extends Model {
     };
   }
 }
-module.exports = { PhoneNumber };
+module.exports = { PhoneNumberModel };

@@ -5,9 +5,19 @@ const hashPassword = async (password) => {
     const hash = await argon2.hash(password, { type: argon2.argon2id });
     return hash;
   } catch (err) {
-    console.log(err);
-    return null;
+    return err;
   }
 };
 
-module.exports = { hashPassword };
+const hashVerify = async (hash, password) => {
+  try {
+    if (await argon2.verify(hash, password)) {
+      return true;
+    }
+    return false;
+  } catch (err) {
+    return err;
+  }
+};
+
+module.exports = { hashPassword, hashVerify };

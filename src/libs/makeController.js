@@ -6,14 +6,13 @@ function makeContoller(controller) {
       const result = await controller(ctx);
       ctx.body = result;
     } catch (error) {
+      let errorData = {};
       if (!(error instanceof Boom)) {
-        // eslint-disable-next-line no-ex-assign
-        error = Boom.boomify(error);
+        errorData = Boom.boomify(error);
       }
-      // eslint-disable-next-line no-ex-assign
-      error = error.output.payload;
-      ctx.status = error.statusCode;
-      ctx.body = error;
+      errorData = error.output.payload;
+      ctx.status = errorData.statusCode;
+      ctx.body = errorData;
     }
   };
 }

@@ -1,6 +1,6 @@
 const { Model } = require('objection');
 
-class Shop extends Model {
+class ShopModel extends Model {
   static get tableName() {
     return 'shops';
   }
@@ -19,14 +19,14 @@ class Shop extends Model {
 
   static relationMappings() {
     // eslint-disable-next-line global-require
-    const { PhoneNumber } = require('../phone_numbers/phone_number.model');
+    const { PhoneNumberModel } = require('../phone_numbers/phone_number.model');
     // eslint-disable-next-line global-require
-    const { User } = require('../users/index');
+    const { UserModel } = require('../users/index');
 
     return {
       phone_number: {
         relation: Model.BelongsToOneRelation,
-        modelClass: PhoneNumber,
+        modelClass: PhoneNumberModel,
         join: {
           from: 'shops.phone_number_id',
           to: 'phone_numbers.id',
@@ -35,7 +35,7 @@ class Shop extends Model {
 
       admins: {
         relation: Model.ManyToManyRelation,
-        modelClass: User,
+        modelClass: UserModel,
         join: {
           from: 'shops.id',
           through: {
@@ -49,4 +49,4 @@ class Shop extends Model {
   }
 }
 
-module.exports = { Shop };
+module.exports = { ShopModel };
