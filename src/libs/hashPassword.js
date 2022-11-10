@@ -5,18 +5,16 @@ const hashPassword = async (password) => {
     const hash = await argon2.hash(password, { type: argon2.argon2id });
     return hash;
   } catch (err) {
-    return err;
+    return null;
   }
 };
 
 const hashVerify = async (hash, password) => {
   try {
-    if (await argon2.verify(hash, password)) {
-      return true;
-    }
-    return false;
+    const result = await argon2.verify(hash, password);
+    return result;
   } catch (err) {
-    return err;
+    return null;
   }
 };
 

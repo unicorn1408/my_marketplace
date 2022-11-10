@@ -1,7 +1,7 @@
 const Boom = require('boom');
-const { UserRepository } = require('../user.repository');
+const { UserRepository } = require('../../users/user.repository');
 const { hashVerify } = require('../../../libs/hashPassword');
-const { getJWT } = require('../../../libs/getJWT');
+const { authService } = require('../authService');
 
 const loginUser = async (ctx) => {
   const userData = ctx.request.body;
@@ -15,9 +15,9 @@ const loginUser = async (ctx) => {
       id: userFound[0].id,
       email: userFound[0].email,
     };
-    const token = getJWT(tokenPayload);
+    const tokens = await authService.getTokens(tokenPayload);
 
-    return ctx.set('Authorization', `Bearer ${token}`);
+    return tokens;
   }
   throw Boom.unauthorized('invalid email or password');
 };

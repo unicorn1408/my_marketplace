@@ -1,17 +1,13 @@
 const { UserRepository } = require('../user.repository');
-const { getJWT } = require('../../../libs/getJWT');
+const { authService } = require('../../authorization/authService')
 
 const createUser = async (ctx) => {
   const newUserData = ctx.request.body;
   const newUser = await UserRepository.create(newUserData);
 
-  const tokenPayload = {
-    id: newUser.id,
-    email: newUser.email,
-  };
-  const token = getJWT(tokenPayload);
+  const tokens = await authService.getTokens(newUser);
 
-  return ctx.set('Authorization', `Bearer ${token}`);
+  return tokens;
 };
 
 module.exports = { createUser };

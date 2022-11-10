@@ -4,9 +4,11 @@ const router = new Router();
 
 const { userRouter } = require('./modules/users/index');
 const { shopRouter } = require('./modules/shops/index');
+const { authRouter } = require('./modules/authorization/routes');
 
 router.use('/users', userRouter.routes());
 router.use('/shops', shopRouter.routes());
+router.use('/auth', authRouter.routes());
 
 router.get('/healthcheck', async (ctx) => {
   const healthcheck = {
