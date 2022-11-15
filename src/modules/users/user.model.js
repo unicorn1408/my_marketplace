@@ -1,7 +1,7 @@
 const { Model } = require('objection');
 const { hashPassword } = require('../../libs/hashPassword');
 
-class User extends Model {
+class UserModel extends Model {
   static get tableName() {
     return 'users';
   }
@@ -35,14 +35,14 @@ class User extends Model {
 
   static relationMappings() {
     // eslint-disable-next-line global-require
-    const { PhoneNumber } = require('../phone_numbers/phone_number.model');
+    const { PhoneNumberModel } = require('../phone_numbers/phone_number.model');
     // eslint-disable-next-line global-require
-    const { Shop } = require('../shops/index');
+    const { ShopModel } = require('../shops/index');
 
     return {
       phone_number: {
         relation: Model.BelongsToOneRelation,
-        modelClass: PhoneNumber,
+        modelClass: PhoneNumberModel,
         join: {
           from: 'users.phone_number_id',
           to: 'phone_numbers.id',
@@ -50,7 +50,7 @@ class User extends Model {
       },
       shops: {
         relation: Model.ManyToManyRelation,
-        modelClass: Shop,
+        modelClass: ShopModel,
         join: {
           from: 'users.id',
           through: {
@@ -64,4 +64,4 @@ class User extends Model {
   }
 }
 
-module.exports = { User };
+module.exports = { UserModel };

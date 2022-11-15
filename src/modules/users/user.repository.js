@@ -1,9 +1,8 @@
-const { User } = require('./user.model');
+const { UserModel } = require('./user.model');
 
 const UserRepository = {
-
   async create(userData) {
-    const newUser = await User.query().insertGraph({
+    const newUser = await UserModel.query().insertGraph({
       first_name: userData.first_name,
       last_name: userData.last_name,
       email: userData.email,
@@ -16,13 +15,17 @@ const UserRepository = {
       ],
     });
 
-    return newUser
+    return newUser;
   },
 
   async findByEmail(email) {
-    const result = await User.query()
+    const result = await UserModel.query()
       .where('email', email);
+    return result;
+  },
 
+  async findById(id) {
+    const result = await UserModel.query().findById(id);
     return result;
   },
 };

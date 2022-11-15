@@ -1,5 +1,5 @@
-const { User } = require('./user.model');
+const { UserModel } = require('./user.model');
 const { userRouter } = require('./routes');
 const { UserRepository } = require('./user.repository');
 
-module.exports = { User, userRouter, UserRepository };
+module.exports = { UserModel, userRouter, UserRepository };

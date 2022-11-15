@@ -1,9 +1,9 @@
-const { Shop } = require('./shop.model');
+const { ShopModel } = require('./shop.model');
 
 const ShopRepository = {
 
   async create(shopData, admin) {
-    const newShop = await Shop.query().insertGraph({
+    const newShop = await ShopModel.query().insertGraph({
       name: shopData.name,
       phone_number: [
         {
@@ -13,7 +13,7 @@ const ShopRepository = {
       ],
     });
 
-    await Shop.relatedQuery('admins')
+    await ShopModel.relatedQuery('admins')
       .for(newShop.id)
       .relate(admin.id);
 
